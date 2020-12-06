@@ -10,5 +10,25 @@
 ----
 ## < 작업 내용 >
 > ###### * 키넥트를 통해 촬영된 플레이어의 몸짓을 기반으로 움직이는 아바타의 obj파일을 폴더에 저장하고, 게임 클라이언트에서 해당 폴더의 obj파일들을 OBJLoader Asset을 이용해 짧은 시간차를 두고 매프레임 읽어서 플레이어가 움직이는대로 게임 속 플레이어의 캐릭터가 움직이게끔 설계
+        facePath = "D:\\SIGGRAPH\\Obj_Kinect_Opengl_Frame_human_deco\\glut\\personF.txt";
+        uvPath = "D:\\SIGGRAPH\\Obj_Kinect_Opengl_Frame_human_deco\\glut\\\\personT.txt";
+        imgPath = "D:\\SIGGRAPH\\Obj_Kinect_Opengl_Frame_human_deco\\glut\\person.bmp";
+        piPath = "D:\\SIGGRAPH\\Obj_Kinect_Opengl_Frame_human_deco\\glut\\personP.txt";
+        objPath = "D:\\SIGGRAPH\\Obj_Kinect_Opengl_Frame_human_deco\\glut\\frame\\person" + count + ".obj";
+        flagPath = "D:\\SIGGRAPH\\Obj_Kinect_Opengl_Frame_human_deco\\glut\\frame\\flag" + count + ".txt";
+        ...
+        if(File.Exists(objPath) && File.Exists(facePath) && File.Exists(uvPath) && File.Exists(piPath))
+        {
+            if (loadedObject != null)
+            {
+                Destroy(loadedObject);
+            }
+            Resources.UnloadUnusedAssets();
+            loadedObject = new OBJLoader().Load(objPath, facePath, uvPath, piPath);
+            SetupObject();
+            Add_Weapon();
+            return true;
+        }     
+        
 > ###### * obj파일에서 index를 통해 인체 부분의 어디인지 파악할 수 있음. 그 중 오른손과 왼손에 Mesh Collider를 추가해 충돌검사 수행
 > ###### * 학습한 행동을 블렌딩하여 수행하는 3D 캐릭터는 유니티쨩으로 결정
